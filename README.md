@@ -1,2 +1,2 @@
 # littleosbook-work
-Exercises from https://github.com/littleosbook/littleosbook
+Files from exercises in https://github.com/littleosbook/littleosbook
