@@ -40,11 +40,59 @@ void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg)
 
 int fb_write(char *buf, unsigned int len)
 {
+	static unsigned int current_row = 0;
+	static unsigned int current_column = 0;
+
 	unsigned int i = 0;
 	while (i < len)
 	{
-		fb_write_cell(i * 2, buf[i], FB_GREEN, FB_LIGHT_GREY);
+		fb_write_cell((current_row * 80 + current_column) * 2,
+			buf[i], FB_GREEN, FB_LIGHT_GREY);
 		i++;
+		current_column++;
+		if (current_column >= 80)
+		{
+			current_column = 0;
+			current_row++;
+			if (current_row >= 25)
+			{
+				current_row = 0;
+			}
+		}
     }
 	return len;
+}
+
+int fb_write_int(int n)
+{
+	char buf[16];
+	char *ptr = buf + sizeof(buf) - 1;
+	int is_negative = 0;
+	int digit;
+	unsigned int len = 0;
+
+	if (n < 0)
+	{
+		n = -n;
+		is_negative = 1;
+	}
+
+	do
+	{
+		digit = n % 10;
+		*ptr = digit + '0';
+		ptr--;
+		len++;
+		n = n / 10;
+	}
+    while (n != 0);
+
+	if (is_negative)
+	{
+		*ptr = '-';
+		ptr--;
+		len++;
+	}
+
+	return fb_write(ptr + 1, len);
 }

@@ -10,4 +10,6 @@
 
 int fb_write(char *buf, unsigned int len);
 
+int fb_write_int(int n);
+
 #endif /* INCLUDE_IO_H */
