@@ -14,3 +14,4 @@ Chapters completed so far (and tagged in git) are:
 Other books and tutorials that helped me are:
 
 - [How to make an Operating System](https://samypesse.gitbook.io/how-to-create-an-operating-system/)
+- [Tutorial: Betriebssystem Programmierung](https://blog.stefan-koch.name/tutorial-betriebssystem-programmierung/)
